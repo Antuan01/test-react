@@ -11,14 +11,15 @@ export default function Account() {
         }
         getData()
     }, [])
-
-    if(accounts) {
-        console.log(Object.values(accounts))
-    }
+    
+    console.log(accounts)
     
 	return (        
 		<div>
-            <p> chet </p>
+            {!accounts && <p> chet </p>}
+            {accounts && accounts.map(acc => {
+                <p> {acc.bank_name} - {acc.account_number} - {acc.account_type} </p>
+            })}
 		</div>
 	);
 }
