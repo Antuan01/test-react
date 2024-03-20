@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useUserStore, UserState } from "../stores/userStore"
 import { useNavigate } from "react-router-dom";
+import { postRequest } from "../services/api";
 
 export default function Login() {
 	const [email, setEmail] = useState<string>("")
@@ -11,30 +12,18 @@ export default function Login() {
 	const handleLogin = async (e: React.SyntheticEvent) => {
 		e.preventDefault()
 		e.stopPropagation()
-
+		
 		if(password && email) {
-			const request = await fetch('https://staging.api.tubotones.com/api/auth/login', {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					"accept": "application/json"
-				},
-				body: JSON.stringify({
-					email,
-					password
-				})
+			const response = await postRequest('/auth/login', {
+				email,
+				password
 			})
-			const response = await request.json()
 
 			localStorage.setItem("auth-user", JSON.stringify(response));
-
 			setLoginData(response)
-
 			navigate("/dashboard")
 		}
-
 	}
-
 
 	return (
 		<div>
