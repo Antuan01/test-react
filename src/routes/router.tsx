@@ -66,7 +66,7 @@ const protectedRoutes = [
 ]
 
 export const createRouter = (auth: boolean) => [
-	...(auth ? protectedRoutes : publicRoutes),		
+	...(auth ? protectedRoutes : publicRoutes),
 	{
 		path: "*",
 		element: <NoMatch />
