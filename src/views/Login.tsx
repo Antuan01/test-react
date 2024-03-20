@@ -21,7 +21,7 @@ export default function Login() {
 
 			localStorage.setItem("auth-user", JSON.stringify(response));
 			setLoginData(response)
-			navigate("/dashboard")
+			navigate("/dashboard/accounts")
 		}
 	}
 

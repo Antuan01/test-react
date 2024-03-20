@@ -5,7 +5,8 @@ const About = lazy(() => import("../views/About.tsx"));
 const Dashboard = lazy(() => import("../views/Dashboard.tsx"));
 const NoMatch = lazy(() => import("../views/NoMatch.tsx"));
 const SignUp = lazy(() => import("../views/Sign-up.tsx"));
-const Login = lazy(() => import("../views/Login.tsx"))
+const Login = lazy(() => import("../views/Login.tsx"));
+const Account = lazy(() => import("../views/Account.tsx"));
 
 const publicRoutes = [
 	{
@@ -51,7 +52,15 @@ const protectedRoutes = [
 						<Home />
 					</Suspense>
 				)
-			}
+			},
+			{
+				path: "/dashboard/accounts",
+				element: (
+					<Suspense fallback={<p>...</p>}>
+						<Account />
+					</Suspense>
+				)
+			},
 		]
 	},
 ]
