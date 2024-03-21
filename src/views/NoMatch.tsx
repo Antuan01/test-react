@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useUserStore } from "../stores/userStore.ts";
 import { useNavigate } from "react-router-dom";
 
@@ -15,8 +15,10 @@ export default function NoMatch() {
 	})
 
 	return (
+		<Suspense fallback={<p> Loading...</p>}>
 		<div>
 			<h2>Nothing here </h2>
 		</div>
+		</Suspense>
 	);
 }

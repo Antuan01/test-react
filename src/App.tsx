@@ -1,6 +1,7 @@
-import { useUserStore, UserState } from "./stores/userStore.ts";
+import { useUserStore } from "./stores/userStore.ts";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { createRouter } from "./routes/router.tsx";
+import { UserState } from "./types/user.ts";
 
 function App() {
 	const setLoginData = useUserStore((state: UserState) => state.setUser)

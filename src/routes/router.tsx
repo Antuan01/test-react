@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { lazy } from 'react';
 
 const Home = lazy(() => import("../views/Home.tsx"));
 const About = lazy(() => import("../views/About.tsx"));
@@ -11,55 +11,31 @@ const Account = lazy(() => import("../views/Account.tsx"));
 const publicRoutes = [
 	{
 		path: "/",
-		element: (
-			<Suspense fallback={<p>...</p>}>
-				<Login />
-			</Suspense>
-		)
+		element: <Login />
 	},
 	{
 		path: "/sign-up",
-		element: (
-			<Suspense fallback={<p>...</p>}>
-				<SignUp />
-			</Suspense>
-		)
+		element: <SignUp />		
 	},
-
 ]
 
 const protectedRoutes = [
 	{
 		path: "/dashboard",
-		element: (
-			<Suspense fallback={<p>...</p>}>
-				<Dashboard />
-			</Suspense>
-		),
+		element: <Dashboard />,
 		children: [
 			{
 				path: "/dashboard/about",
-				element: (
-					<Suspense fallback={<p>...</p>}>
-						<About />
-					</Suspense>
-				)
+				element: <About />
+
 			},
 			{
 				path: "/dashboard/home",
-				element: (
-					<Suspense fallback={<p>...</p>}>
-						<Home />
-					</Suspense>
-				)
+				element: <Home />
 			},
 			{
 				path: "/dashboard/accounts",
-				element: (
-					<Suspense fallback={<p>...</p>}>
-						<Account />
-					</Suspense>
-				)
+				element: <Account />
 			},
 		]
 	},

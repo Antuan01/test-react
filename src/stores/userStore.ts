@@ -1,13 +1,5 @@
 import { create } from "zustand";
-
-export type UserState = {
-	name: string | null;
-	lastname?: string | null;
-	email?: string | null;
-	access_token?: string | null;
-	isAuth: boolean
-	setUser: (data: UserState) => void
-}
+import { UserState } from "../types/user";
 
 export const useUserStore = create<UserState>()(set => ({
 	name: null,
@@ -15,7 +7,7 @@ export const useUserStore = create<UserState>()(set => ({
 	email: null,
 	isAuth: false,
 	access_token: null,
-	setUser: (data) => set(() => ({		
+	setUser: (data: UserState) => set(() => ({		
 		name: data.name,
 		lastname: data.lastname,
 		email: data.email,

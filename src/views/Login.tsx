@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { useUserStore, UserState } from "../stores/userStore"
+import { Suspense, useState } from "react";
+import { useUserStore } from "../stores/userStore"
 import { useNavigate } from "react-router-dom";
 import { postRequest } from "../services/api";
+import { UserState } from "../types/user";
 
 export default function Login() {
 	const [email, setEmail] = useState<string>("")
@@ -26,14 +27,16 @@ export default function Login() {
 	}
 
 	return (
-		<div>
-			<form onSubmit={handleLogin}>
-				<label> Username: </label>
-				<input name="username" type="email" value={email} onChange={e => setEmail(e.target.value)} required/>
-				<label> Password: </label>
-				<input name="password" type="password" value={password} onChange={e => setPassword(e.target.value)} required/>
-				<button type='submit' >Login </button>
-			</form>
-		</div>
+		<Suspense fallback={<p>...</p>}>
+			<div>
+				<form onSubmit={handleLogin}>
+					<label> Username: </label>
+					<input name="username" type="email" value={email} onChange={e => setEmail(e.target.value)} required/>
+					<label> Password: </label>
+					<input name="password" type="password" value={password} onChange={e => setPassword(e.target.value)} required/>
+					<button type='submit' >Login </button>
+				</form>
+			</div>
+		</Suspense>
 	);
 }

@@ -1,9 +1,13 @@
+import { Suspense } from "react"
+
 export default function SignUp() {
 	return (
-		<div>
-			<input />
-			<input />
-			<button> Sign Up </button>
-		</div>
+		<Suspense fallback={<p>...</p>}>
+			<div>
+				<input />
+				<input />
+				<button> Sign Up </button>
+			</div>
+		</Suspense>
 	);
 }

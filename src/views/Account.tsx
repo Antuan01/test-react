@@ -1,29 +1,37 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect } from "react";
 import { getRequest } from "../services/api";
-interface AccountData{ 
-    bank_name? : string
-    account_number?: string
-    account_type?: string
-}
+import { AccountData } from "../types/account";
+import { useAccountStore } from "../stores/accountStore";
+
 export default function Account() {
-    const [accounts, setAccounts] = useState<AccountData[] | undefined>()
+    const setAccountData = useAccountStore((state) => state.setData)
+    const accountData = useAccountStore((state) => state.accountData);
+    
+    const getData = async () => {
+        const data = await getRequest('/ticket/ticket-accounts')
+        setAccountData(data.data as AccountData[])
+        console.log("Fetched..")
+    }
 
     useEffect(() => {
-         const getData = async () => {
-            const data = await getRequest('/ticket/ticket-accounts')
-            setAccounts(data.data as AccountData[])  
-        }
-        getData()
+        if(accountData) {
+            return
+        } else {
+            getData()
+        }        
     }, [])
-    console.log(accounts)
+
+    console.log("Rendered..");
 	return (
-		<div>
-           <> {!accounts && <p> chet </p>}</>
-            <ul>
-                {accounts && accounts.map(acc =>
-                    <li key={acc?.bank_name}> {acc?.bank_name ?? '?'} - {acc?.account_number?? '?' } - {acc?.account_type ?? '?'} </li>
-                )}
-            </ul>
-		</div>
+        <Suspense fallback={<p>...</p>}>
+            <div>
+            <> {!accountData && <p> chet </p>}</>
+                <ul>
+                    {accountData && accountData.map(acc =>
+                        <li key={acc.id}> {acc?.owner_full_name } - {acc?.owner_identification } - {acc?.bank_name } - {acc?.account_number } - {acc?.account_type } </li>
+                    )}
+                </ul>
+            </div>
+        </Suspense>
 	);
 }
