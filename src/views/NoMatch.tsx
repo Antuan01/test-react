@@ -4,21 +4,21 @@ import { useNavigate } from "react-router-dom";
 
 export default function NoMatch() {
 	const navigate = useNavigate();
-	const auth = useUserStore((state) => state.isAuth)
+	const auth = useUserStore(state => state.isAuth);
 
-	useEffect( () => {
+	useEffect(() => {
 		if (auth) {
-			navigate("/dashboard")
+			navigate("/dashboard");
 		} else {
-			navigate("/")
+			navigate("/");
 		}
-	})
+	});
 
 	return (
 		<Suspense fallback={<p> Loading...</p>}>
-		<div>
-			<h2>Nothing here </h2>
-		</div>
+			<div>
+				<h2>Nothing here </h2>
+			</div>
 		</Suspense>
 	);
 }

@@ -1,12 +1,13 @@
-import { lazy } from 'react';
+import { lazy } from "react";
 
 const Home = lazy(() => import("../views/Home.tsx"));
-const About = lazy(() => import("../views/About.tsx"));
+const Client = lazy(() => import("../views/Client.tsx"));
 const Dashboard = lazy(() => import("../views/Dashboard.tsx"));
 const NoMatch = lazy(() => import("../views/NoMatch.tsx"));
 const SignUp = lazy(() => import("../views/Sign-up.tsx"));
 const Login = lazy(() => import("../views/Login.tsx"));
 const Account = lazy(() => import("../views/Account.tsx"));
+const Sales = lazy(() => import("../views/Sales.tsx"));
 
 const publicRoutes = [
 	{
@@ -15,9 +16,9 @@ const publicRoutes = [
 	},
 	{
 		path: "/sign-up",
-		element: <SignUp />		
-	},
-]
+		element: <SignUp />
+	}
+];
 
 const protectedRoutes = [
 	{
@@ -25,21 +26,24 @@ const protectedRoutes = [
 		element: <Dashboard />,
 		children: [
 			{
-				path: "/dashboard/about",
-				element: <About />
-
+				path: "/dashboard/users",
+				element: <Client />
 			},
 			{
-				path: "/dashboard/home",
-				element: <Home />
+				path: "/dashboard/sales/:type",
+				element: <Sales />
 			},
 			{
 				path: "/dashboard/accounts",
 				element: <Account />
 			},
+			{
+				path: "/dashboard/sale/:id",
+				element: <Home />
+			}
 		]
-	},
-]
+	}
+];
 
 export const createRouter = (auth: boolean) => [
 	...(auth ? protectedRoutes : publicRoutes),
