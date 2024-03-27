@@ -1,6 +1,5 @@
 import { Suspense, useEffect } from "react";
 import { getRequest } from "../services/api";
-import { AccountData } from "../types/account";
 import { useAccountStore } from "../stores/accountStore";
 
 export default function Account() {
@@ -9,7 +8,7 @@ export default function Account() {
 
 	const getData = async () => {
 		const data = await getRequest("/ticket/ticket-accounts");
-		setAccountData(data.data as AccountData[]);
+		setAccountData(data.data);
 		console.log("Fetched..");
 	};
 
