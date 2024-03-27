@@ -9,9 +9,7 @@ export default function Dashboard() {
 		<Suspense fallback={<p>...</p>}>
 			<div className="canvas">
 				<div className="side">
-				    
 					<div className="slider">
-					
 						<h2>Dashboard</h2>
 						<Link to="/dashboard/users" className={location.pathname.endsWith("users")? "selected": "" }> Clientes </Link>
 						<Link to="/dashboard/sales/pending" className={location.pathname.endsWith("pending")? "selected": "" }> Ventas Pendientes </Link>

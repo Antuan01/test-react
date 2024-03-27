@@ -1,69 +1,69 @@
-import { Suspense, useEffect } from "react";
+import { Suspense, useCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getRequest } from "../services/api";
 import { useSalesStore } from "../stores/salesStore";
 import SalesRow from "../components/SalesRow";
 
+
+type SaleType = 1 | 2 | 3 | 0
+
+const parseSaleType = (type: string) : SaleType => {
+	switch(type){
+		case "pending":
+			return 3;
+		case "rejected":
+			return 1;
+		case "verified":
+			return 2;
+		default: return 0;
+	}
+}
+
+
 export default function Sales() {
 	const path = useParams();
 
 	const opt: string = `${path.type}`;
-	const parseSaleType = (type: string) => {
-		switch(type){
-			case "pending":
-				return 3;
-			case "rejected":
-				return 1;
-			case "verified":
-				return 2;
-			default: 
-				return 0;
-		}
-	}
 
-	const saleType: number = parseSaleType(opt);
+	const saleType: SaleType = parseSaleType(opt);
 
 	console.log(opt, saleType)
-	const storeSetOptions = (a: number) => {
-		switch (a) {
-			case 3:
-				return useSalesStore(state => state.setPendingSales);
-			case 1:
-				return useSalesStore(state => state.setRejectedSales);
-			case 2:
-				return useSalesStore(state => state.setApprovedSales);
+
+
+
+	const useStoreSetOptions  = (a: SaleType)=> useSalesStore(state => {
+		switch(a){
+			case 3: return state.setPendingSales;
+			case 2: return state.setRejectedSales;
+			case 1: return state.setApprovedSales;
+			default: return state.setApprovedSales;
 		}
-	}
+	});
 
-	const dataOptions = (b: number) => {
-		switch (b) {
-			case 3:
-				return useSalesStore(state => state.pendingSales);
-			case 1:
-				return useSalesStore(state => state.rejectedSales);
-			case 2:
-				return useSalesStore(state => state.approvedSales);
+
+	const useDataOptions  = (b: SaleType)=> useSalesStore(state => {
+		switch(b){
+			case 3: return state.pendingSales;
+			case 2: return state.approvedSales;
+			case 1: return state.rejectedSales;
+			default: return state.rejectedSales;
 		}
-	}
+	});
 
-	const setSalesData = storeSetOptions(saleType)
 
-	const salesData = dataOptions(saleType);
+	const setSalesData = useStoreSetOptions(saleType)
 
-	const getSalesData = async () => {
-		const data = await getRequest(`/ticket/ticket-bills?opt=${saleType}`);
-		setSalesData(data);
-		console.log("Fetched..");
-		
-	};
+	const salesData = useDataOptions(saleType);
+
+	const getSalesData = useCallback( async () => {
+		if(salesData)return;
+		getRequest(`/ticket/ticket-bills?opt=${saleType}`)
+			.then(data =>  setSalesData(data))
+	},[saleType, salesData, setSalesData]);
 
 	useEffect(() => {
-		if(salesData) {
-			return
-		} else {
-			getSalesData()
-		}
-	},[opt])
+		getSalesData()
+	},[getSalesData])
 
 	return (
 		<Suspense fallback={<p> Loading... </p>}>

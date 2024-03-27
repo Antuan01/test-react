@@ -12,7 +12,7 @@ export const useSalesStore = create<SaleState>()(set => ({
 			salesData: {
 				...data.data,
 				...state.salesData
-			}			
+			}
 		}))
 	},
 	setPendingSales(data) {

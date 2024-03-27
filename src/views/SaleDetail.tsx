@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from "react";
+import { Suspense, useCallback, useEffect } from "react";
 import { useSalesStore } from "../stores/salesStore";
 import { useParams } from "react-router-dom";
 import { getRequest } from "../services/api";
@@ -12,16 +12,16 @@ const SaleDetail = () => {
 	const all = useSalesStore(state => state)
 	console.log(all)
 
+	const getSalesData = useCallback( async () => {
+		if(!data)return
+		const fetchData = await getRequest(`/ticket/ticket-bills/${opt}`);
+		setData({data: fetchData, ids: [opt]});
+		console.log("Fetched..");
+	},[data, opt, setData]);
 
 	useEffect(() => {
-		const getSalesData = async () => {
-			const fetchData = await getRequest(`/ticket/ticket-bills/${opt}`);
-			setData({data: fetchData, ids: [opt]});
-			console.log("Fetched..");		
-		};
-		if(!data)
-			getSalesData()
-	},[data])
+		getSalesData()
+	},[opt, getSalesData])
 
 	return (
 		<Suspense fallback={<p> Loading... </p>}>
