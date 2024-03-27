@@ -1,20 +1,94 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .canvas {
     /* background-color: aqua; */
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
 
-.slider {
-    /* background-color: blueviolet; */
-    width: 20%;
+.side{
     display: flex;
     flex-direction: column;
+}
+.side div{
+    display: flex;
+    flex-direction: column;
+}
+
+.side div img{
+    max-width: 200px;
+}
+.slider {
+    background: linear-gradient(blueviolet, blue);
     align-items: center;
-    height: 80vh;
+    color: whitesmoke;
+    border-radius: 2rem;
+    padding-bottom: 2rem;
+}
+
+.slider a {
+    background-color: rgba(0, 183, 255, 0.212);
+    align-items: center;
+    padding: 20px;
+    color: whitesmoke;
+    border-radius: 2rem;
+    text-align: center;
+    margin-top: 3px;
+    width: 90%;
+    text-decoration: none;
+}
+
+.slider a:hover, .slider a.selected {
+    background-color: rgb(0, 183, 255);
 }
 
 .child {
-    /* background-color: brown; */
-    width: 80%;
+    background: linear-gradient(brown, rgb(165, 122, 42));
     display: flex;
-    justify-content: center;
+    width: 80%;
+    color: whitesmoke;
+    border-radius: 2rem;
+    margin-left: .9rem;
+    height: 90vh;
+    overflow: hidden;
 }
+.child-content {
+    width: 100%;
+    padding: 1rem;
+    justify-content: center;
+    overflow-y: scroll;
+}
+
+.saleDetail {
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.575);
+    overflow-wrap: break-word;
+    text-shadow:  black 0.1rem 0.1rem;
+    max-width: 500px;
+    margin-inline: auto;
+    border-radius: 2rem;
+}
+.saleDetail img{
+    border-radius: 2rem;
+    max-width: 400px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: brown;
+  }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background:yellow;
+  }
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }

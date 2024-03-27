@@ -26,7 +26,7 @@ export const getRequest = async (path: string) => {
 		}
 	});
 
-	return await request.json();
+	return request.json();
 };
 
 export const postRequest = async (path: string, body: Record<string, string>) => {

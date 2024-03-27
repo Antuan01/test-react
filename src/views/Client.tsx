@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from "react";
+import { Suspense, useCallback, useEffect } from "react";
 import { getRequest } from "../services/api";
 import { useClientStore } from "../stores/clientStore";
 import { ClientData } from "../types/client";
@@ -7,19 +7,16 @@ export default function Client() {
 	const setClientData = useClientStore(state => state.setData);
 	const clientData = useClientStore(state => state.clientData);
 
-	const getData = async () => {
+	const getData = useCallback( async () => {
+		if(clientData) return
 		const data = await getRequest("/ticket/ticket-users");
 		setClientData(data as ClientData[]);
 		console.log("Fetched..");
-	};
+	},[clientData, setClientData]);
 
 	useEffect(() => {
-		if (clientData) {
-			return;
-		} else {
-			getData();
-		}
-	}, []);
+		getData()
+	}, [getData]);
 
 	console.log("Rendered..");
 	return (
