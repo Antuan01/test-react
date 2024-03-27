@@ -12,24 +12,21 @@ const SaleDetail = () => {
 	const all = useSalesStore(state => state)
 	console.log(all)
 
-	const getSalesData = async () => {
-		const fetchData = await getRequest(`/ticket/ticket-bills/${opt}`);
-		setData({data: fetchData, ids: [opt]});
-		console.log("Fetched..");		
-	};
 
 	useEffect(() => {
-		if(data) {
-			return
-		} else {
+		const getSalesData = async () => {
+			const fetchData = await getRequest(`/ticket/ticket-bills/${opt}`);
+			setData({data: fetchData, ids: [opt]});
+			console.log("Fetched..");		
+		};
+		if(!data)
 			getSalesData()
-		}
-	},[])
+	},[data])
 
 	return (
 		<Suspense fallback={<p> Loading... </p>}>
 			{!data && <p> Cargando</p>}
-			{data && <div>
+			{data && <div className="saleDetail">
 				<h2>Sales Details</h2>
 				<p> Estado: {data?.status} </p>
 				<p> Cliente: </p>
@@ -40,7 +37,10 @@ const SaleDetail = () => {
 				<p> Datos del pago Movil </p>
 				<p> CI/Rif: {data?.payment_id} </p>
 				<p> Telefono: {data?.payment_number} </p>
-				<p> imagen: {data?.image_url} </p>
+				<p> Imagen: {data?.image_url &&
+						<img src={data?.image_url}></img>
+					}
+				</p>
 				<p> {data?.event_name} </p>
 				<p> Pedido </p>
 				<p> Nombre:  {data?.event_name} </p>
