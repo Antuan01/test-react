@@ -14,5 +14,12 @@ export const useUserStore = create<UserState>()(set => ({
 			email: data.email,
 			access_token: data.access_token,
 			isAuth: true
-		}))
+		})),
+	logOut: () => set(() => ({
+		name: null,
+		lastname: null,
+		email: null,
+		isAuth: false,
+		access_token: null,
+	}))
 }));

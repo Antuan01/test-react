@@ -4,7 +4,6 @@ import { lazy } from "react";
 const Client = lazy(() => import("../views/Client.tsx"));
 const Dashboard = lazy(() => import("../views/Dashboard.tsx"));
 const NoMatch = lazy(() => import("../views/NoMatch.tsx"));
-const SignUp = lazy(() => import("../views/Sign-up.tsx"));
 const Login = lazy(() => import("../views/Login.tsx"));
 const Account = lazy(() => import("../views/Account.tsx"));
 const Sales = lazy(() => import("../views/Sales.tsx"));
@@ -14,10 +13,6 @@ const publicRoutes = [
 	{
 		path: "/",
 		element: <Login />
-	},
-	{
-		path: "/sign-up",
-		element: <SignUp />
 	}
 ];
 

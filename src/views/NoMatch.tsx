@@ -8,7 +8,7 @@ export default function NoMatch() {
 
 	useEffect(() => {
 		if (auth) {
-			navigate("/dashboard");
+			navigate("/dashboard/sales/pending");
 		} else {
 			navigate("/");
 		}

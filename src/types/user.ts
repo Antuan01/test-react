@@ -5,4 +5,5 @@ export interface UserState {
 	access_token?: string | null;
 	isAuth: boolean;
 	setUser: (data: UserState) => void;
+	logOut: () => void;
 }

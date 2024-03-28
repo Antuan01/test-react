@@ -2,6 +2,7 @@ import { useUserStore } from "./stores/userStore.ts";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { createRouter } from "./routes/router.tsx";
 import { UserState } from "./types/user.ts";
+import "./styles/index.css";
 
 function App() {
 	const setLoginData = useUserStore((state: UserState) => state.setUser);

@@ -1,20 +1,7 @@
 const baseUrl = "https://staging.api.tubotones.com/api";
-
-export const sendRequest = async (path: string) => {
-	const url = `${baseUrl}${path}`;
-
-	const request = await fetch(url, {
-		headers: {
-			"Content-Type": "application/json"
-		}
-	});
-
-	return await request.json();
-};
+const user = localStorage.getItem("auth-user");
 
 export const getRequest = async (path: string) => {
-	const user = localStorage.getItem("auth-user");
-
 	const token = user && JSON.parse(user).access_token;
 
 	const url = `${baseUrl}${path}`;
@@ -26,12 +13,10 @@ export const getRequest = async (path: string) => {
 		}
 	});
 
-	return await request.json();
+	return request.json();
 };
 
 export const postRequest = async (path: string, body: Record<string, string>) => {
-	const user = localStorage.getItem("auth-user");
-
 	const token = user && JSON.parse(user).access_token;
 
 	const url = `${baseUrl}${path}`;
@@ -45,5 +30,5 @@ export const postRequest = async (path: string, body: Record<string, string>) =>
 		body: JSON.stringify(body)
 	});
 
-	return await request.json();
+	return request.json();
 };
