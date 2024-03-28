@@ -1,16 +1,16 @@
 export interface SaleRequest {
-	data: [Sale],
-	ids: [number]
+	data: [Sale];
+	ids: [number];
 }
 export interface SaleState {
-	salesData: Sale[] | null,
-	pendingSales: number[] | null,
-	approvedSales: number[] | null,
-	rejectedSales: number[] | null,
-	addSale: (data: SaleRequest) => void,
-	setPendingSales: (data: SaleRequest) => void,
-	setApprovedSales: (data: SaleRequest) => void,
-	setRejectedSales: (data: SaleRequest) => void
+	salesData: Sale[] | null;
+	pendingSales: number[] | null;
+	approvedSales: number[] | null;
+	rejectedSales: number[] | null;
+	addSale: (data: SaleRequest) => void;
+	setPendingSales: (data: SaleRequest) => void;
+	setApprovedSales: (data: SaleRequest) => void;
+	setRejectedSales: (data: SaleRequest) => void;
 }
 
 export interface Sale {
@@ -46,17 +46,17 @@ export interface Sale {
 }
 
 export interface TicketUser {
-	id: number
-	username: string
-	telegram_id: string
-	name: string
-	lastname: string
-	email: string
-	phone: string
-	city: string
-	created_at: string
-	updated_at: string
-	messageable: number
-	fullName: string
-	total_purchases: number
+	id: number;
+	username: string;
+	telegram_id: string;
+	name: string;
+	lastname: string;
+	email: string;
+	phone: string;
+	city: string;
+	created_at: string;
+	updated_at: string;
+	messageable: number;
+	fullName: string;
+	total_purchases: number;
 }

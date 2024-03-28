@@ -24,32 +24,33 @@ export default function Sales() {
 
 	const saleType: SaleType = parseSaleType(opt);
 
-	console.log(opt, saleType)
+	console.log(opt, saleType);
 
-	const useStoreSetOptions = (a: SaleType) => 
+	const useStoreSetOptions = (a: SaleType) =>
 		useSalesStore(state => {
-		switch (a) {
-			case 3:
-				return state.setPendingSales;
-			case 1:
-				return state.setRejectedSales;
-			case 2:
-				return state.setApprovedSales;
-		}
-	})
+			switch (a) {
+				case 3:
+					return state.setPendingSales;
+				case 1:
+					return state.setRejectedSales;
+				case 2:
+					return state.setApprovedSales;
+			}
+		});
 
-	const useDataOptions = (b: SaleType) => useSalesStore(state => {
-		switch (b) {
-			case 3:
-				return state.pendingSales;
-			case 1:
-				return state.rejectedSales;
-			case 2:
-				return state.approvedSales;
-		}
-	})
+	const useDataOptions = (b: SaleType) =>
+		useSalesStore(state => {
+			switch (b) {
+				case 3:
+					return state.pendingSales;
+				case 1:
+					return state.rejectedSales;
+				case 2:
+					return state.approvedSales;
+			}
+		});
 
-	const setSalesData = useStoreSetOptions(saleType)
+	const setSalesData = useStoreSetOptions(saleType);
 
 	const salesData = useDataOptions(saleType);
 
@@ -65,10 +66,9 @@ export default function Sales() {
 	return (
 		<Suspense fallback={<p> Loading... </p>}>
 			<div>
-				<h2>{ path.type } Sales</h2>
-				<p> {!salesData && "chet" } </p>
-					{salesData &&
-						salesData.map((el, i) => <SalesRow id={el} key={i}/>)}
+				<h2>{path.type} Sales</h2>
+				<p> {!salesData && "chet"} </p>
+				{salesData && salesData.map((el, i) => <SalesRow id={el} key={i} />)}
 			</div>
 		</Suspense>
 	);

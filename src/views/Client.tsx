@@ -19,7 +19,7 @@ export default function Client() {
 	}, [getData]);
 
 	console.log("Rendered..");
-	
+
 	return (
 		<Suspense fallback={<p>...</p>}>
 			<div>
